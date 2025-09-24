@@ -1,0 +1,23 @@
+<nav>
+<a href="index.html">Home</a>
+<a href="about.html">About</a>
+<a href="contact.html">Contact</a>
+</nav>
+<form name="contcatForm" onsubmit="return validateForm()">
+<input type="text" name="name" placeholder="Enter your name">
+<input type="email" name="email" placeholder="Enter your email">
+<textarea name="message" placeholder="Enter message"></textarea>
+<button type="submit">Send</button>
+</form>
+function validateForm(){
+let name=document.forms["contactForm"]["name"].value;
+let email=document.forms["contactForm"]["email"].value;
+
+if(name =="" || email == ""){
+alerts("Name and Email must be filled out!");
+return false;
+}
+return true;
+}
+
+
