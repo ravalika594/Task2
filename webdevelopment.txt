@@ -1,0 +1,21 @@
+<section class="hero">
+<h1>Hello,I'm Alex </h1>
+<p>Web Developer | Designer | Learner</p>
+<button>View My Work</button>
+</section>
+button{
+background: #007bff;
+color: white;
+padding: 10px 20px;
+border: none;
+transition: 0.3s ease;
+}
+button:hover{
+background: #0056b3;
+transition: scale(1.05);
+}
+@media (max-width: 768px){
+.hero h1{
+font-size: 24px;
+}
+}
