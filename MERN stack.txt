@@ -1,0 +1,44 @@
+const express=require("express");
+const mongoose=require("mangoose");
+const cors=require("cors");
+const app=express();
+app.use(cors());
+app.use(express.json());
+mongoose.connect("your_mongodb_url")
+  .then(()=>console.log("MongoDB Connected"));
+const Task=mongoose.model("Task",new mongoose.Schema({text: String}));
+app.post("/add",async (req,res)=>{
+const newTask=new Task(req.body);
+await newTask.save();
+res.send(newTask);
+});
+app.get("/tasks",async (req, res)=>{
+const tasks=await Task.find();
+res.send(tasks);
+});
+app.listen(5000,()=>console.log("Server running on port 5000"));
+import React,{useEffect,useState}from "react";
+import axios from "axios";
+function App(){
+const[tasks,setTasks]=userState([]);
+const[text,setText]=userState("");
+useEffect(()=>{
+axios.get("http://localhost:500/tasks").then(res=>setTasks(res.data));
+},[]);
+const addTask=()=>{
+if(!text) return alert("Task cannot be empty!");
+axios.post("http://localhost:5000/add",{ text})
+.then(res=>setTasks([...tasks, res.data]));
+setText("");
+};
+return(
+<div>
+<h1>MERN To-Do App</h1>
+<input value={text} onChange={e=>setText(e.target.value)}
+<button onClick={addTask}>Add</button>
+<ul>{tasks.map((t)=><li key={t._id}>{t.text}</li>){</ul>
+</div>
+);
+}
+export default App;
+
