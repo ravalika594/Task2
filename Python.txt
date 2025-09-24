@@ -1,0 +1,19 @@
+import csv
+def add_expense(desc,amount):
+with open("expenses.csv", "a", newline="") as f:
+writer=csv.writer(f)
+writer.writerow([desc,amount])
+def view_expenses():
+with open("expenses.csv", "r") as f:
+for row in csv.reader(f):
+print(f"Item: {row[0]},Amount: {row[1]}")
+def total_expenses():
+total=0
+with open("expenses.csv","r")as f:
+for row in csv.reader(f):
+total+=int(row[1])
+print("Total Expenses: ",total)
+add_expense("Coffee",50)
+add_expense("Snacks",100)
+view_expenses()
+total_expenses()
